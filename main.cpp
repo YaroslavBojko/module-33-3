@@ -44,6 +44,15 @@ std::vector<Registry<T1, T2>> remove(std::vector<Registry<T1, T2>>& pairs)
     return pairs;
 }
 
+template<typename T1, typename T2>
+void print(std::vector<Registry<T1, T2>>& pairs)
+{
+    for (int i = 0; i < pairs.size(); ++i)
+    {
+        std::cout << pairs[i].key << " " << pairs[i].values << std::endl;
+    }
+}
+
 int main() {
     std::vector<Registry<int, std::string>> pairs;
 
@@ -55,11 +64,9 @@ int main() {
 
         if (command == "add") add(pairs);
         if (command == "remove") remove(pairs);
+        if (command == "print") print(pairs);
     }
 
 
-    for (int i = 0; i < pairs.size(); ++i)
-    {
-        std::cout << pairs[i].key << " " << pairs[i].values << std::endl;
-    }
+
 }
