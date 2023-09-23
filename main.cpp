@@ -53,8 +53,24 @@ void print(std::vector<Registry<T1, T2>>& pairs)
     }
 }
 
+template<typename T1, typename T2>
+void find(std::vector<Registry<T1, T2>>& pairs)
+{
+    T1 key;
+    std::cout << "Enter key: ";
+    std::cin >> key;
+    for (int i = 0; i < pairs.size(); i++)
+    {
+        if (key == pairs[i].key)
+            std::cout << pairs[i].values << " ";
+    }
+    std::cout << std::endl;
+}
+
 int main() {
-    std::vector<Registry<int, std::string>> pairs;
+    //std::vector<Registry<int, std::string>> pairs;
+    //std::vector<Registry<std::string, double>> pairs;
+    std::vector<Registry<double, int>> pairs;
 
     std::string command;
     while (command != "exit")
@@ -65,8 +81,6 @@ int main() {
         if (command == "add") add(pairs);
         if (command == "remove") remove(pairs);
         if (command == "print") print(pairs);
+        if (command == "find") find(pairs);
     }
-
-
-
 }
