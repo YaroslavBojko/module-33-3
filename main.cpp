@@ -11,66 +11,66 @@ public:
     Registry(T1 inKey, T2 inValues) : key(inKey), values(inValues) {};
 };
 
-template<typename T1, typename T2>
-std::vector<Registry<T1, T2>> add(std::vector<Registry<T1, T2>>& pairs)
+template <typename T1, typename T2>
+class Operating
 {
-    T1 key;
-    T2 values;
+public:
+    std::vector<Registry<T1, T2>> pairs;
 
-    std::cout << "Enter key: ";
-    std::cin >> key;
-    std::cout << "Enter values: ";
-    std::cin >> values;
-    Registry<T1, T2> registry(key, values);
-    pairs.push_back(registry);
-    return pairs;
-}
-
-template<typename T1, typename T2>
-std::vector<Registry<T1, T2>> remove(std::vector<Registry<T1, T2>>& pairs)
-{
-    T1 key;
-    std::cout << "Enter key: ";
-    std::cin >> key;
-    for (int i = 0; i < pairs.size(); i++)
+    void add()
     {
-        auto it = pairs.cbegin();
-        if (key == pairs[i].key)
+        T1 key;
+        T2 values;
+
+        std::cout << "Enter key: ";
+        std::cin >> key;
+        std::cout << "Enter values: ";
+        std::cin >> values;
+        Registry<T1, T2> registry(key, values);
+        pairs.push_back(registry);
+    }
+
+    void print()
+    {
+        for (int i = 0; i < pairs.size(); ++i)
         {
-            pairs.erase(it + i);
-            i--;
+            std::cout << pairs[i].key << " " << pairs[i].values << std::endl;
         }
     }
-    return pairs;
-}
 
-template<typename T1, typename T2>
-void print(std::vector<Registry<T1, T2>>& pairs)
-{
-    for (int i = 0; i < pairs.size(); ++i)
+    void remove()
     {
-        std::cout << pairs[i].key << " " << pairs[i].values << std::endl;
+        T1 key;
+        std::cout << "Enter key: ";
+        std::cin >> key;
+        for (int i = 0; i < pairs.size(); i++)
+        {
+            auto it = pairs.cbegin();
+            if (key == pairs[i].key)
+            {
+                pairs.erase(it + i);
+                i--;
+            }
+        }
     }
-}
 
-template<typename T1, typename T2>
-void find(std::vector<Registry<T1, T2>>& pairs)
-{
-    T1 key;
-    std::cout << "Enter key: ";
-    std::cin >> key;
-    for (int i = 0; i < pairs.size(); i++)
+    void find()
     {
-        if (key == pairs[i].key)
-            std::cout << pairs[i].values << " ";
+        T1 key;
+        std::cout << "Enter key: ";
+        std::cin >> key;
+        for (int i = 0; i < pairs.size(); i++) {
+            if (key == pairs[i].key)
+                std::cout << pairs[i].values << " ";
+        }
+        std::cout << std::endl;
     }
-    std::cout << std::endl;
-}
+};
 
 int main() {
-    //std::vector<Registry<int, std::string>> pairs;
-    //std::vector<Registry<std::string, double>> pairs;
-    std::vector<Registry<double, int>> pairs;
+    //Operating<int, std::string> operating;
+    //Operating<std::string, double> operating;
+    Operating<double, int> operating;
 
     std::string command;
     while (command != "exit")
@@ -78,9 +78,9 @@ int main() {
         std::cout << "Enter the command (add, remove, print, find, exit): ";
         std::cin >> command;
 
-        if (command == "add") add(pairs);
-        if (command == "remove") remove(pairs);
-        if (command == "print") print(pairs);
-        if (command == "find") find(pairs);
+        if (command == "add") operating.add();
+        if (command == "remove") operating.remove();
+        if (command == "print") operating.print();
+        if (command == "find") operating.find();
     }
 }
